@@ -1,7 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HierarchicalSystem.API.Data;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
+using Microsoft.EntityFrameworkCore;
 
 namespace HierarchicalSystem.API.Controllers
 {
@@ -15,20 +16,29 @@ namespace HierarchicalSystem.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IActionResult GetValues()
+        [HttpGet] //http://localhost:5000/folders
+        public async Task<IActionResult> GetValues()
         {
-            var values = _context.Folders.ToList();
+            var values = await  _context.Folders.ToListAsync();
+
             return Ok(values);
         }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+       
+        //http://localhost:5000/folders
+        [HttpGet("{id}", Name = "GetFolder")]
+        public async Task<IActionResult> GetFolder(int id)
         {
-            var values = _context.Folders.FirstOrDefault(x=>x.Id==id); 
+            var values = await _context.Folders.FirstOrDefaultAsync(x => x.Id == id); 
             return Ok(values);
-        }   
-
+        }
+        //http://localhost:5000/folders/subfolders/1
+        [HttpGet("subfolders/{folderId}")]
+        public async Task<IActionResult> GetSubfolders(int folderId)
+        {  
+            var folders = await  _context.Folders.Where(x => x.ParentId == folderId).ToListAsync();
+            return Ok(folders);
+        }
+        
         [HttpPost]
         public void Post([FromBody] string value)
         {

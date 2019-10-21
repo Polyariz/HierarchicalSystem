@@ -1,0 +1,12 @@
+<div class="container mt-5" style="text-align: left; margin: 20px;">
+
+  <h1> Folder: {{folder?.name}}</h1>
+  <div *ngFor="let f of subfolders">
+    
+   <a [routerLink]="['/',f.path]" class="link"> {{f.name}}</a>  
+  </div>
+</div>
+
+
+  
+ 
