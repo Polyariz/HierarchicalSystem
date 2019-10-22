@@ -9,6 +9,7 @@ import { FolderComponent } from './folder/folder.component';
 import { appRoutes } from './routes';
 import { FolderListComponent } from './folder-list/folder-list.component';
 import { FolderService } from './_services/folder.service';
+import { FolderDetailResolver } from './_resolvers/folder-detail.resolver';
 
 @NgModule({
    declarations: [
@@ -23,7 +24,8 @@ import { FolderService } from './_services/folder.service';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      FolderService
+      FolderService,
+      FolderDetailResolver
    ],
    bootstrap: [
       AppComponent

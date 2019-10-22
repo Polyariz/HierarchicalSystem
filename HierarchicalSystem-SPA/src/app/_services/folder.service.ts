@@ -22,5 +22,9 @@ import { Folder } from '../_models/foder';
     getFolder(id): Observable<Folder> {
       return this.http.get<Folder>(this.baseUrl + 'folders/' + id);
     }
+
+    // getFolderByPath(path): Observable<Folder> {
+    //   return this.http.get<Folder>(this.baseUrl + 'folders/' + path);
+    // }
   }
   
